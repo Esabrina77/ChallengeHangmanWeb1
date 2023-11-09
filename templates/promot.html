@@ -1,0 +1,43 @@
+{{define "promot"}}
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge1</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/Style.css">
+</head>
+
+<body>
+   <div id="Blocks">
+<h1>Informations sur la promotion</h1>
+<div>
+<ul>
+    <li>
+   <p>Nom: {{.Promotion1.Nom }}</p>
+     </li>
+    <li>
+   <p>Filière: {{.Promotion1.Filiere}}</p>
+   </li>
+   <li>
+    <p>Niveau: {{.Promotion1.Niveau}}</p>
+    </li>
+   <li>
+    <p>Nombes des etudiants: {{.NombreEtudiants}}</p>
+    </li>
+</ul>
+</div>
+<h1>Liste des étudiants</h1>
+
+{{ range .Promotion1.Students}}
+ <div id="Students">
+ <span>  <p>{{.Prenom}} <strong>{{.Nom}}</strong></p> </span> 
+<span> <p>{{.Age}}</p> </span> 
+ <p>{{.Sexe}}</p>
+ </div>
+ {{end}}
+
+</div>
+</body>
+</html>
+{{end}}
