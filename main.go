@@ -79,6 +79,7 @@ func TreatHandler(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/user/init?error="+errorMessage, http.StatusSeeOther)
 		return
 	}
+
 	dateStr := r.FormValue("Date")
 	layout := "02/01/2006" // Format attendu : jour/mois/année (02/01/2006)
 	date, err := time.Parse(layout, dateStr)
