@@ -9,21 +9,21 @@
 </head>
 
 <body>
-   <div id="Blocks">
+  <div id="Blocks">
 <h1>Informations sur la promotion</h1>
 <div>
 <ul>
     <li>
-   <p>Nom: {{.Promotion1.Nom }}</p>
+   <p><strong>Nom:</strong> {{.Promotion1.Nom }}</p>
      </li>
     <li>
-   <p>Filière: {{.Promotion1.Filiere}}</p>
+   <p><strong>Filière:</strong> {{.Promotion1.Filiere}}</p>
    </li>
    <li>
-    <p>Niveau: {{.Promotion1.Niveau}}</p>
+    <p><strong>Niveau:</strong> {{.Promotion1.Niveau}}</p>
     </li>
    <li>
-    <p>Nombes des etudiants: {{.NombreEtudiants}}</p>
+    <p><strong>Nombres des etudiants:</strong> {{.NombreEtudiants}}</p>
     </li>
 </ul>
 </div>
@@ -31,10 +31,16 @@
 
 {{ range .Promotion1.Students}}
  <div id="Students">
- <span>  <p>{{.Prenom}} <strong>{{.Nom}}</strong></p> </span> 
-<span> <p>{{.Age}}</p> </span> 
- <p>{{.Sexe}}</p>
- </div>
+     <div class="mentor">
+<span><p>{{.Prenom}} {{.Nom}}</p></span>
+<span><p>{{.Age}}</p>  </span>
+</div>
+ {{if eq .Sexe "M"}}
+   <img src="../CSS/GenderMan.png" alt="Homme">
+   {{else}}
+   <img src="../CSS/GenderWomen.png" alt="Femme">
+   {{end}}
+</div>
  {{end}}
 
 </div>

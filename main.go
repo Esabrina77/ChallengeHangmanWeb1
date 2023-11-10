@@ -26,6 +26,7 @@ type DataPromotion struct { //informations sur les édonnées envoyés
 	Promotion1      Promotion
 	NombreEtudiants int
 }
+type CSS string
 
 func main() {
 	temp, err := template.ParseGlob("./templates/*.html")
@@ -41,16 +42,16 @@ func main() {
 				Filiere: "Informatique",
 				Niveau:  5,
 				Students: []Student{
-					{Nom: "RODRIGUES", Prenom: "Cyril", Sexe: "Masculin", Age: 22},
-					{Nom: "MEDERREG", Prenom: "Kheir-eddine", Sexe: "Masculin", Age: 22},
-					{Nom: "PHILIPIERT", Prenom: "Alan", Sexe: "Masculin", Age: 26}},
+					{Nom: "RODRIGUES", Prenom: "Cyril", Sexe: "M", Age: 22},
+					{Nom: "MEDERREG", Prenom: "Kheir-eddine", Sexe: "F", Age: 22},
+					{Nom: "PHILIPIERT", Prenom: "Alan", Sexe: "M", Age: 26}},
 			},
 			NombreEtudiants: 3,
 		}
 		temp.ExecuteTemplate(w, "promot", DataPage)
 	})
 
-	fileServer := http.FileServer(http.Dir("../CSS"))
+	fileServer := http.FileServer(http.Dir("CSS"))
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", fileServer))
 	http.ListenAndServe(port, nil)
 }
