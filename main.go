@@ -82,14 +82,25 @@ func TreatHandler(w http.ResponseWriter, r *http.Request) {
 	dateStr := r.FormValue("Date")
 	layout := "02/01/2006" // Format attendu : jour/mois/année (02/01/2006)
 	date, err := time.Parse(layout, dateStr)
+
 	if err != nil {
-		errorMessage := "Format de date incorrect. Veuillez entrer la date au format jj/mm/aaaa."
+		errorMessage := "Format de date incorrect. Veuillez entrer la date au format jj/mm/aaaa| Fevrier:Respectez la norme 'année bisextile/année ordinaire'"
+		http.Error(w, errorMessage, http.StatusBadRequest)
+		return
+	}
+	if date.Year() < 1900 || date.Year() > 2023 {
+		errorMessage := "Format de date incorrect.problème au niveau de 'aa' .La chronologie n'est pas respectée"
+		http.Error(w, errorMessage, http.StatusBadRequest)
+		return
+	}
+	if date.Month() < 0 || date.Month() > 12 {
+		errorMessage := "Format de date incorrect. mm est compris entre 1 & 12"
 		http.Error(w, errorMessage, http.StatusBadRequest)
 		return
 	}
 
-	if date.Year() < 1900 || date.Year() > 2100 {
-		errorMessage := "Format de date incorrect. Veuillez entrer la date au format jj/mm/aaaa."
+	if date.Day() < 0 || date.Day() > 31 {
+		errorMessage := "Format de jj incorrect pour cette date."
 		http.Error(w, errorMessage, http.StatusBadRequest)
 		return
 	}
