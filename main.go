@@ -13,11 +13,12 @@ const port = "localhost:8080"
 var (
 	counter int
 	temp    *template.Template
+	err     error
 )
 
-type PageData struct {
-	Message  string
-	Counteur int
+type DataCounter struct {
+	Message string
+	Counter int
 }
 
 type Promotion struct {
@@ -38,7 +39,6 @@ type DataPromotion struct { //informations sur les édonnées envoyés
 }
 
 func main() {
-	var err error
 	temp, err = template.ParseGlob("./templates/*.html")
 	if err != nil {
 		fmt.Println(err)
@@ -55,9 +55,13 @@ func main() {
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
+	//data := PageData{}
+	//temp.ExecuteTemplate(w, "user", data)
 }
 
 func TreatHandler(w http.ResponseWriter, r *http.Request) {
+	//	data := PageData{}
+	//	temp.ExecuteTemplate(w, "treat", data)
 }
 
 func changeHandler(w http.ResponseWriter, r *http.Request) {
@@ -70,9 +74,9 @@ func changeHandler(w http.ResponseWriter, r *http.Request) {
 		message = "Le chiffre est impair"
 	}
 
-	data := PageData{
-		Message:  message,
-		Counteur: counter,
+	data := DataCounter{
+		Message: message,
+		Counter: counter,
 	}
 	temp.ExecuteTemplate(w, "compt", data)
 }
