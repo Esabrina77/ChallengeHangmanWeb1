@@ -1,14 +1,29 @@
-{{define "treat"}}
+{{define "display"}}
 
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challenge2</title>
+    <title>Challenge3</title>
     <link rel="stylesheet" type="text/css" href="../CSS/Style.css">
 </head>
-<body>
-    
+<body> 
+    <div id="Blocks3">
+        <div class="Display">
+      <h2>Vos données personnelles</h2>  
+   <span><strong><p>Nom</p></strong> </span>
+   <span><p>{{.Nom}}</p></span>
+
+    <span><strong><p>Prénom</strong> </p></span>
+    <span><p>{{.Prenom}}</p></span>
+
+    <span> <strong><p> Date Anniversaire</strong> </p></span>
+    <span><p>{{.DateNaissance}}</p></span>
+
+        <span> <strong><p> Sexe</strong> </p></span>
+        <span> <p>{{.Sexe}}</p></span>
+        </div>
+    </div>
 </body>
 </html>
 {{end}}

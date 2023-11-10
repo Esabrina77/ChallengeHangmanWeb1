@@ -58,12 +58,12 @@ func main() {
 	http.HandleFunc("/change", changeHandler)
 	http.HandleFunc("/user/init", InitHandler)
 	http.HandleFunc("/user/treatment", TreatHandler)
+	http.HandleFunc("/user/display", DisplayHandler)
 	http.ListenAndServe(port, nil)
 
 }
 
 func InitHandler(w http.ResponseWriter, r *http.Request) {
-
 	temp.ExecuteTemplate(w, "init", nil)
 }
 
@@ -74,12 +74,10 @@ func TreatHandler(w http.ResponseWriter, r *http.Request) {
 		DateNaissance: r.FormValue("Date"),
 		Sexe:          r.FormValue("gender"),
 	}
-	http.Redirect(w, r, "/display", http.StatusSeeOther)
-	//redirection vers Display
+	http.Redirect(w, r, "/user/display", http.StatusSeeOther)
 }
 
 func DisplayHandler(w http.ResponseWriter, r *http.Request) {
-
 	temp.ExecuteTemplate(w, "display", user)
 }
 
