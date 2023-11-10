@@ -1,0 +1,32 @@
+{{define "init"}}
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge2</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/Style.css">
+</head>
+<body>
+    <h2>  Renseigner vos données</h2>
+    <form action="/user/treatment" method="post">
+  <label for= "name">Nom</label>
+     <input type="text" name="name" id="name">
+
+  <label for= "surname">Prénom</label>
+      <input type="text" name="surname" id="surname">
+
+  <label for= "Date">Date Anniversaire</label>
+      <input type="date" name="Date" id="Date">
+
+  <label for= "gender">Sexe</label>
+    <select name="gender" id="gender">
+        <option value="Masculin">Homme</option>
+        <option value="Feminin">Femme</option>
+    </select>
+
+     <button type="submit">Valider</button>
+    </form>
+</body>
+</html>
+{{end}}

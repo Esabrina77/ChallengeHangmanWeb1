@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	//"golang.org/x/text/date"
 )
 
 // VARIABLES & CONSTANTES
@@ -14,13 +15,20 @@ var (
 	counter int
 	temp    *template.Template
 	err     error
+	user    DataUser
 )
+
+type DataUser struct {
+	Nom           string
+	Prenom        string
+	DateNaissance string
+	Sexe          string
+}
 
 type DataCounter struct {
 	Message string
 	Counter int
 }
-
 type Promotion struct {
 	Nom      string
 	Filiere  string
@@ -48,20 +56,31 @@ func main() {
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", fileServer))
 	http.HandleFunc("/promo", promoHandler)
 	http.HandleFunc("/change", changeHandler)
-	http.HandleFunc(" /user/init", UserHandler)
-	http.HandleFunc(" /user/treatment", TreatHandler)
+	http.HandleFunc("/user/init", InitHandler)
+	http.HandleFunc("/user/treatment", TreatHandler)
 	http.ListenAndServe(port, nil)
 
 }
 
-func UserHandler(w http.ResponseWriter, r *http.Request) {
-	//data := PageData{}
-	//temp.ExecuteTemplate(w, "user", data)
+func InitHandler(w http.ResponseWriter, r *http.Request) {
+
+	temp.ExecuteTemplate(w, "init", nil)
 }
 
 func TreatHandler(w http.ResponseWriter, r *http.Request) {
-	//	data := PageData{}
-	//	temp.ExecuteTemplate(w, "treat", data)
+	user = DataUser{
+		Nom:           r.FormValue("name"),
+		Prenom:        r.FormValue("surname"),
+		DateNaissance: r.FormValue("Date"),
+		Sexe:          r.FormValue("gender"),
+	}
+	http.Redirect(w, r, "/display", http.StatusSeeOther)
+	//redirection vers Display
+}
+
+func DisplayHandler(w http.ResponseWriter, r *http.Request) {
+
+	temp.ExecuteTemplate(w, "display", user)
 }
 
 func changeHandler(w http.ResponseWriter, r *http.Request) {
