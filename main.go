@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
-	//"golang.org/x/text/date"
+	"time"
 )
 
 // VARIABLES & CONSTANTES
@@ -74,6 +74,26 @@ func TreatHandler(w http.ResponseWriter, r *http.Request) {
 		DateNaissance: r.FormValue("Date"),
 		Sexe:          r.FormValue("gender"),
 	}
+	if user.Nom == "" || user.Prenom == "" || user.DateNaissance == "" || user.Sexe == "" {
+		errorMessage := "VEILLEZ REMPLIR TOUS  LES CHAMPS DU FORMULAIRE"
+		http.Redirect(w, r, "/user/init?error="+errorMessage, http.StatusSeeOther)
+		return
+	}
+	dateStr := r.FormValue("Date")
+	layout := "02/01/2006" // Format attendu : jour/mois/année (02/01/2006)
+	date, err := time.Parse(layout, dateStr)
+	if err != nil {
+		errorMessage := "Format de date incorrect. Veuillez entrer la date au format jj/mm/aaaa."
+		http.Error(w, errorMessage, http.StatusBadRequest)
+		return
+	}
+
+	if date.Year() < 1900 || date.Year() > 2100 {
+		errorMessage := "Format de date incorrect. Veuillez entrer la date au format jj/mm/aaaa."
+		http.Error(w, errorMessage, http.StatusBadRequest)
+		return
+	}
+
 	http.Redirect(w, r, "/user/display", http.StatusSeeOther)
 }
 

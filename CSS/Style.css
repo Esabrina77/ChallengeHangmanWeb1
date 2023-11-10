@@ -3,9 +3,11 @@ body{
     padding: 20px;
     display: flex;
     justify-content: center;
-  
-
 }
+*{
+  padding: 0;
+  margin: 0;
+ }
 
 #Students{
   display: flex;
@@ -48,38 +50,19 @@ ul li{
     border: 2px solid #000000;   
 }
 
-#Blocks3{
-  width: 40%;
-  height: 40%;
-  margin: auto;
-  padding: 2%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: solid black;
-  border-radius: 10px;
-  background-color: rgb(37, 36, 36);
-  }
-  
 li{
   padding: 2%;
  }
 
- *{
-  padding: 0;
-  margin: 0;
- }
-
-
 #Blocks2{
-  width: 40%;
-  height: 20%;
   margin: auto;
   padding: 2%;
   display: flex;
   flex-direction: column;
+  justify-content:space-evenly;
   align-items: center;
-  background-color: rgb(26, 25, 25);
+  height: 20%;
+  background-color: rgba(26, 25, 25, 0.632);
   color: #000000;
   border: 2px solid #000000;  
 }
@@ -97,19 +80,3 @@ li{
   background-color: white;
   }
   
-  #Display{
-    width: 45%;
-    height: 60%;
-    display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-    border-radius: 10px;
-  background-color: white;
-  }
-
-
-  input{
-    border: solid black;
-    border-radius: 20px;
-  }
